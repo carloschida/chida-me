@@ -10,7 +10,19 @@ import remarkReadingTime from "remark-reading-time";
 import cloudflare from "@astrojs/cloudflare";
 
 export default defineConfig({
-  site: "https://chida.me",
+  adapter: cloudflare(),
+
+  build: {
+    inlineStylesheets: "always",
+  },
+
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "es"],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
 
   integrations: [
     sitemap(),
@@ -33,30 +45,15 @@ export default defineConfig({
     ],
   },
 
-  i18n: {
-    defaultLocale: "en",
-    locales: ["en", "es"],
-    routing: {
-      prefixDefaultLocale: false,
-    },
-  },
 
   prefetch: {
     prefetchAll: true,
     defaultStrategy: "viewport",
   },
 
-  build: {
-    inlineStylesheets: "always",
-  },
+  site: "https://chida.me",
 
   vite: {
     plugins: [tailwindcss()],
   },
-
-  adapter: cloudflare({
-    platformProxy: {
-      enabled: true,
-    }
-  }),
 });
