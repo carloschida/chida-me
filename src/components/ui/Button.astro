@@ -1,11 +1,11 @@
 ---
 interface Props {
-  variant?: "primary" | "secondary" | "tertiary";
-  size?: "sm" | "md" | "lg";
-  href?: string;
-  type?: "button" | "submit" | "reset";
-  class?: string;
-  "aria-label"?: string;
+  variant?: "primary" | "secondary" | "tertiary" | undefined;
+  size?: "sm" | "md" | "lg" | undefined;
+  href?: string | undefined;
+  type?: "button" | "submit" | "reset" | undefined;
+  class?: string | undefined;
+  "aria-label"?: string | undefined;
   [key: string]: unknown;
 }
 

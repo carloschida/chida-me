@@ -1,0 +1,61 @@
+---
+import Card from "@/components/ui/Card.astro";
+import type { CvType } from "@/schemas/cv.ts";
+import { Icon } from "astro-icon/components";
+import iso3166 from "iso-3166-1-alpha-2";
+
+interface Props {
+  location?: CvType["location"];
+  citizenship?: CvType["citizenship"];
+}
+
+const { location, citizenship } = Astro.props;
+---
+
+<Card
+  class="flex flex-col gap-y-4 text-base md:text-sm lg:text-base md:px-4 lg:px-8 mb-4"
+>
+  {
+    location !== undefined ? (
+      <div class="flex flex-row justify-between align-middle">
+        <div
+          class={
+            "size-12 rounded-lg flex justify-center items-center bg-red-400/10 text-red-400"
+          }
+        >
+          <Icon name={"lucide:map-pin-house"} class="size-6" />
+        </div>
+        <div class="text-right">
+          <h2 class="font-bold">Location</h2>
+          <p>
+            {[
+              location.city,
+              location.region,
+              iso3166.getCountry(location.country),
+            ]
+              .filter(Boolean)
+              .join(", ")}
+          </p>
+        </div>
+      </div>
+    ) : null
+  }
+
+  {
+    citizenship !== undefined ? (
+      <div class="flex flex-row justify-between align-middle">
+        <div
+          class={`size-12 rounded-lg flex justify-center items-center bg-blue-400/10 text-blue-400`}
+        >
+          <Icon name={"lucide:earth"} class="size-6" />
+        </div>
+        <div class="text-right">
+          <h2 class="font-bold">Citizenship</h2>
+          <p>
+            {citizenship.map((code) => iso3166.getCountry(code)).join(", ")}
+          </p>
+        </div>
+      </div>
+    ) : null
+  }
+</Card>

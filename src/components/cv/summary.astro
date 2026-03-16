@@ -1,0 +1,34 @@
+---
+import type { CvType } from "@/schemas/cv.ts";
+
+interface Props {
+  summary: NonNullable<CvType["summary"]>;
+}
+
+const { summary } = Astro.props;
+---
+
+<section class="mb-8">
+  <h2 class="mb-4 text-2xl text-primary font-bold">Summary</h2>
+
+  {
+    [summary].flat() ? (
+      <>
+        <p class="mb-2">
+          Seasoned software architect and developer native to the cloud. Highly
+          vested in SQL schemas that allow non-breaking expansions. Technical
+          backgrounds in mathematical, financial, statistical, and computer
+          sciences. Over a decade of translating stakeholder’s requirements in
+          plain language to tasks and code.
+        </p>
+        <p class="mb-2">
+          My experience spans multiple business lines. As a self-taught
+          programmer, I enjoy discovering new technologies and for quick
+          prototyping. I like mentoring teams from different cultures and
+          backgrounds. Remote-first since 2019 but always willing to relocate
+          should the opportunity arise.
+        </p>
+      </>
+    ) : null
+  }
+</section>

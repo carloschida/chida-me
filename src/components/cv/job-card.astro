@@ -1,0 +1,239 @@
+---
+import iso3611 from "iso-3166-1-alpha-2";
+import type {
+  CompanySchema,
+  JobSchema,
+  LocationType,
+  PositionSchema,
+} from "@/schemas/cv.ts";
+import Badge from "@/components/ui/Badge.astro";
+import Card from "@/components/ui/Card.astro";
+
+interface Props {
+  job: JobSchema | PositionSchema;
+  company?: typeof CompanySchema.Type | undefined;
+  isPreviousPosition?: boolean;
+}
+
+const { job, isPreviousPosition = false, company: parentCompany } = Astro.props;
+
+const company = "company" in job ? job.company : parentCompany;
+
+function formatDate(date: Date | string) {
+  return new Date(date).toLocaleDateString("en-GB", {
+    month: "short",
+    year: "numeric",
+  });
+}
+
+function formatLocation(location: LocationType) {
+  const firstPart = [location.city, location.region].filter(Boolean).join(", ");
+  if (location.country === undefined) {
+    return firstPart;
+  }
+  return `${firstPart} (${iso3611.getCountry(location.country)})`;
+}
+const Tag = isPreviousPosition ? "div" : Card;
+---
+
+<Tag
+  class:list={[
+    "flex flex-col gap-y-4 reveal",
+    !isPreviousPosition && "mb-4",
+    isPreviousPosition && "pt-4 border-t border-border/50",
+  ]}
+>
+  <div class="flex flex-row justify-between items-start">
+    <div>
+      <h3
+        class:list={[isPreviousPosition ? "text-lg" : "text-xl", "font-bold"]}
+      >
+        {job.name}
+      </h3>
+      {
+        !isPreviousPosition && company?.name && (
+          <p
+            class:list={[
+              isPreviousPosition ? "text-base" : "text-lg",
+              "text-muted-foreground",
+            ]}
+          >
+            {company?.name}
+            {job.location !== undefined ? (
+              <span> • {formatLocation(job.location)}</span>
+            ) : null}
+            {!job.location && company?.location && (
+              <span> • {formatLocation(company.location)}</span>
+            )}
+          </p>
+        )
+      }
+      {
+        !isPreviousPosition && company?.description && (
+          <p class="text-sm italic text-muted-foreground mt-1">
+            {company.description}
+          </p>
+        )
+      }
+    </div>
+    <div class="text-right text-sm text-muted-foreground">
+      {formatDate(job.startDate)}
+      {" "}
+      -
+      {" "}
+      {job.endDate ? formatDate(job.endDate) : "Present"}
+    </div>
+  </div>
+
+  {job.description && <p>{job.description}</p>}
+
+  {
+    job.responsibilities && job.responsibilities.length > 0 ? (
+      <div class="space-y-2">
+        <h4 class="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
+          Responsibilities
+        </h4>
+        <ul class="list-disc ml-5 space-y-1">
+          {job.responsibilities.map((resp) => (
+            <li class="pl-1">{resp}</li>
+          ))}
+        </ul>
+      </div>
+    ) : null
+  }
+
+  {
+    job.achievements && job.achievements.length > 0 ? (
+      <div class="space-y-2">
+        <h4 class="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
+          Achievements
+        </h4>
+        <ul class="list-disc ml-5 space-y-1">
+          {job.achievements.map((achievement) => (
+            <li class="pl-1">{achievement}</li>
+          ))}
+        </ul>
+      </div>
+    ) : null
+  }
+
+  {
+    job.skills && job.skills.length > 0 && (
+      <div class="space-y-2">
+        <h4 class="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
+          Skills
+        </h4>
+        <div class="flex flex-wrap gap-2">
+          {job.skills.map((skill) => (
+            <Badge variant="secondary">
+              {typeof skill === "string" ? skill : skill.name}
+            </Badge>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  {
+    job.technologies && job.technologies.length > 0 ? (
+      <div class="space-y-2 pt-2">
+        <h4 class="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
+          Technologies
+        </h4>
+        <div class="flex flex-wrap gap-2">
+          {job.technologies.map((tech) => (
+            <Badge variant="outline">
+              {typeof tech === "string" ? tech : tech.name}
+            </Badge>
+          ))}
+        </div>
+      </div>
+    ) : null
+  }
+
+  {
+    job.projects && job.projects.length > 0 && (
+      <div class="space-y-2 pt-2">
+        <h4 class="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
+          Key Projects
+        </h4>
+        <div class="grid grid-cols-1 gap-4">
+          {job.projects.map((project) => (
+            <div class="border-l-2 border-border pl-4 py-1">
+              <h5 class="font-bold">
+                {project.name}
+                {project.company && (
+                  <span class="text-muted-foreground font-normal">
+                    {" "}
+                    • {project.company.name}
+                  </span>
+                )}
+              </h5>
+              {project.description && (
+                <p class="text-sm text-muted-foreground mt-1">
+                  {project.description}
+                </p>
+              )}
+
+              {project.responsibilities &&
+                project.responsibilities.length > 0 && (
+                  <div class="mt-2">
+                    <h6 class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/80">
+                      Responsibilities
+                    </h6>
+                    <ul class="list-disc ml-4 text-sm space-y-0.5 mt-1">
+                      {project.responsibilities.map((resp) => (
+                        <li class="pl-1">{resp}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+              {project.achievements && project.achievements.length > 0 && (
+                <div class="mt-2">
+                  <h6 class="text-xs font-semibold uppercase tracking-wider text-muted-foreground/80">
+                    Achievements
+                  </h6>
+                  <ul class="list-disc ml-4 text-sm space-y-0.5 mt-1">
+                    {project.achievements.map((achievement) => (
+                      <li class="pl-1">{achievement}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              <div class="flex flex-wrap gap-2 mt-3">
+                {project.skills &&
+                  project.skills.map((skill) => (
+                    <Badge variant="secondary" class="text-[10px] px-2 py-0">
+                      {typeof skill === "string" ? skill : skill.name}
+                    </Badge>
+                  ))}
+                {project.technologies &&
+                  project.technologies.map((tech) => (
+                    <Badge variant="outline" class="text-[10px] px-2 py-0">
+                      {typeof tech === "string" ? tech : tech.name}
+                    </Badge>
+                  ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  {
+    job.previousPositions && job.previousPositions.length > 0 && (
+      <div class="mt-4 flex flex-col gap-y-4">
+        {job.previousPositions.map((prevJob) => (
+          <Astro.self
+            job={prevJob}
+            company={company}
+            isPreviousPosition={true}
+          />
+        ))}
+      </div>
+    )
+  }
+</Tag>

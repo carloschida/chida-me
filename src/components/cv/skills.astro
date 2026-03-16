@@ -1,0 +1,26 @@
+---
+import Badge from "@/components/ui/Badge.astro";
+import Card from "@/components/ui/Card.astro";
+import type { CvType } from "@/schemas/cv.ts";
+
+interface Props {
+  skills: NonNullable<CvType["skills"]>;
+}
+
+const { skills } = Astro.props;
+---
+
+<Card
+  class="flex flex-col gap-y-4 text-base md:text-sm lg:text-base md:p-4 lg:p-8 mb-4"
+>
+  <h2 class="font-bold text-primary text-lg">Skills</h2>
+  <div class="flex flex-row flex-wrap justify-between gap-2">
+    {
+      skills.map((skill) => (
+        <Badge variant="secondary">
+          {typeof skill === "string" ? skill : skill.name}
+        </Badge>
+      ))
+    }
+  </div>
+</Card>

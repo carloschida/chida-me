@@ -1,11 +1,11 @@
 ---
 import type { ImageMetadata } from "astro";
 interface Props {
-  title?: string;
-  description?: string;
-  canonical?: string;
-  ogImage?: string | ImageMetadata;
-  ignoreTitleTemplate?: boolean;
+  title?: string | undefined;
+  description?: string | undefined;
+  canonical?: string | undefined;
+  ogImage?: string | ImageMetadata | undefined;
+  ignoreTitleTemplate?: boolean | undefined;
 }
 
 import { siteConfig } from "@/config/site";

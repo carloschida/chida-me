@@ -30,9 +30,9 @@ const readingTime = remarkPluginFrontmatter?.minutesRead
   </div>
   <div class="flex flex-1 flex-col p-6">
     <div class="flex-1">
-      <p class="text-sm font-medium text-primary">
-        {post.data.author}
-      </p>
+      <!--<p class="text-sm font-medium text-primary">-->
+      <!--  {post.data.author}-->
+      <!--</p>-->
       <a
         href={`/blog/${post.id}`}
         class="mt-2 block before:absolute before:inset-0 before:z-10"
@@ -55,7 +55,7 @@ const readingTime = remarkPluginFrontmatter?.minutesRead
         <div class="flex space-x-1 text-sm text-muted-foreground">
           <time datetime={post.data.pubDate.toISOString()}>
             {
-              post.data.pubDate.toLocaleDateString("en-US", {
+              post.data.pubDate.toLocaleDateString("en-GB", {
                 year: "numeric",
                 month: "long",
                 day: "numeric",

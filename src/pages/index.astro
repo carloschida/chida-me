@@ -7,82 +7,84 @@ import devImg from "@/assets/images/dev_balanced.png";
 import openSourceImg from "@/assets/images/open-source.png";
 import Content2 from "@/components/widgets/Content2.astro";
 const metadata = {
-  title: `${siteConfig.name} — The next step for your project`,
-  description:
-    "A modern and professional template for your web projects with Astro and Tailwind CSS. Boost your development with a solid foundation.",
-  ignoreTitleTemplate: true,
+  title: `${siteConfig.name} — Software · Maths · Linguistics`,
+  description: siteConfig.description,
+  // ignoreTitleTemplate: true,
 };
 ---
 
 <BaseLayout {metadata}>
   <Hero
-    title={`Starter Template for <br class="hidden md:block" /> <span class="bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Web Developers</span>`}
-    tagline="Astro v5 + Tailwind v4"
+    title={`Let's talk <br class="hidden md:block" /> <span class="bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Software · Maths · Linguistics</span>`}
+    tagline="Can I help you with something? Click here."
     description={`${siteConfig.description}`}
     actions={[
       {
-        text: "Get Started",
-        href: "https://github.com/devgelo-labs/astro-starter-pro",
-        variant: "primary",
-        icon: "lucide:github",
+        text: "Read my blog",
+        href: "/blog",
+        variant: "secondary",
+        icon: "lucide:rss",
+        ariaLabel: "Go to my blog",
       },
       {
-        text: "Our Services",
-        href: "/services",
-        variant: "secondary",
-        icon: "lucide:arrow-right",
-        ariaLabel: "Learn more about our services",
+        text: "Check me out",
+        href: "/cv",
+        variant: "primary",
+        icon: "lucide:file-user",
+        ariaLabel: "See my CV",
       },
     ]}
   />
   <Features
     tagline="Features"
-    title="What's Included"
-    subtitle="A selection of tools and configurations to streamline your workflow."
+    title="What I do"
+    subtitle="Some ways in which I can help you and your team reach your goals"
     features={[
       {
-        title: "Optimized SEO",
+        title: "Web and Mobile apps",
         description:
-          "Base configuration for Meta tags, Open Graph, and Sitemap generation.",
-        icon: "lucide:scan-search",
+          "From a simple website to a complex mobile app, I can bring your ideas to life",
+        icon: "lucide:monitor-cloud",
         iconClass: "bg-blue-500/10 text-blue-400",
       },
       {
-        title: "High Performance",
-        description: "Lightweight structure for fast load times.",
-        icon: "lucide:zap",
+        title: "Codebase rewrite",
+        description:
+          "Remove legacy code and get started with up-to-date technology and best practices",
+        icon: "lucide:pen-line",
         iconClass: "bg-purple-500/10 text-purple-400",
       },
       {
-        title: "Tailwind v4",
+        title: "Mentoring",
         description:
-          "Integrated configuration with the latest version of Tailwind CSS.",
-        icon: "lucide:palette",
+          "Increase the productivity of your team with tailored sessions within the context of your business",
+        icon: "lucide:graduation-cap",
         iconClass: "bg-pink-500/10 text-pink-400",
       },
     ]}
   />
+
   <Content2
     items={[
       {
-        title: "Responsive Design",
+        title: "Effect.ts",
         description:
-          "Base configuration for Meta tags, Open Graph, and Sitemap generation.",
-        icon: "lucide:scan-search",
+          "Created by white-bearded TypeScript sorcerers to help us get rid of runtime bugs and improve reusability",
+        icon: "lucide:sparkles",
         iconClass: "bg-blue-500/10 text-blue-400",
       },
       {
-        title: "High Performance",
-        description: "Lightweight structure for fast load times.",
-        icon: "lucide:zap",
-        iconClass: "bg-purple-500/10 text-purple-400",
+        title: "TanStack Suite",
+        description:
+          "Originally only react-query but today a full suite with the best-in-class developer experience",
+        icon: "lucide:tree-palm",
+        iconClass: "bg-green-500/10 text-green-400",
       },
       {
-        title: "Tailwind v4",
-        description:
-          "Integrated configuration with the latest version of Tailwind CSS.",
-        icon: "lucide:palette",
-        iconClass: "bg-pink-500/10 text-pink-400",
+        title: "Bitcoin",
+        description: "The promise of a free money in the form of code",
+        icon: "lucide:bitcoin",
+        iconClass: "bg-orange-500/10 text-orange-400",
       },
     ]}
     image={devImg}
@@ -90,32 +92,33 @@ const metadata = {
   >
     <Fragment>
       <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">
-        Development
+        Tools and Technologies
       </h3>
-      We provide a solid foundation to start your projects with best practices.
+      Those that I feel most excited about and have experience with
     </Fragment>
   </Content2>
+
   <Content2
     items={[
       {
-        title: "Open Source",
+        title: "Finance",
         description:
-          "Developed under the MIT license, free for personal and commercial use.",
-        icon: "lucide:github",
+          "With my academic background in actuarial science, maths for insurance and finance, no term or calculation is too difficult for me",
+        icon: "lucide:wallet",
         iconClass: "bg-indigo-500/10 text-indigo-400",
       },
       {
-        title: "Community Driven",
+        title: "Privacy",
         description:
-          "Built with the feedback and contributions of the developer community.",
-        icon: "lucide:users",
+          "Exploring who should get what and why so that your user's data is not misused",
+        icon: "lucide:hat-glasses",
         iconClass: "bg-orange-500/10 text-orange-400",
       },
       {
-        title: "Regular Updates",
+        title: "Data",
         description:
-          "Continuously improved with the latest technologies and best practices.",
-        icon: "lucide:refresh-cw",
+          "No one gets off on normalising schemas as much as I do so that you can extract, transform and load your data with ease",
+        icon: "lucide:database-zap",
         iconClass: "bg-teal-500/10 text-teal-400",
       },
     ]}
@@ -125,10 +128,9 @@ const metadata = {
   >
     <Fragment>
       <h3 class="text-2xl font-bold tracking-tight sm:text-3xl mb-2">
-        Open Source & Community
+        Interests
       </h3>
-      Join the revolution of modern web development. This project is open for everyone
-      to use, learn from, and contribute to.
+      Line of business where I feel more comfortable
     </Fragment>
   </Content2>
 </BaseLayout>

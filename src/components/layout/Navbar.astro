@@ -1,6 +1,7 @@
 ---
 import { siteConfig } from "@/config/site";
 import ThemeToggle from "@/components/ui/ThemeToggle.astro";
+import { Icon } from "astro-icon/components";
 ---
 
 <nav
@@ -41,7 +42,15 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
         rel="noopener noreferrer"
         class="rounded-full bg-foreground/10 px-4 py-2 text-sm font-semibold text-foreground transition-all hover:bg-foreground/20"
       >
-        GitHub
+        <Icon name="lucide:github" class={"size-4 inline-flex"} /> GitHub
+      </a>
+      <a
+        href={siteConfig.socialLinks.linkedIn}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rounded-full bg-foreground/10 px-4 py-2 text-sm font-semibold text-foreground transition-all hover:bg-foreground/20"
+      >
+        <Icon name="lucide:linkedin" class={"size-4 inline-flex"} /> LinkedIn
       </a>
       <ThemeToggle />
     </div>
@@ -111,8 +120,16 @@ import ThemeToggle from "@/components/ui/ThemeToggle.astro";
         href={siteConfig.socialLinks.github}
         target="_blank"
         class="block rounded-md px-3 py-2 text-base font-medium text-blue-400 transition-colors hover:cursor-pointer hover:bg-blue-500/10 hover:text-blue-300"
-        >GitHub</a
       >
+        <Icon name="lucide:github" class={"size-4 inline-flex"} /> GitHub
+      </a>
+      <a
+        href={siteConfig.socialLinks.linkedIn}
+        target="_blank"
+        class="block rounded-md px-3 py-2 text-base font-medium text-blue-400 transition-colors hover:cursor-pointer hover:bg-blue-500/10 hover:text-blue-300"
+      >
+        <Icon name="lucide:linkedin" class={"size-4 inline-flex"} /> LinkedIn
+      </a>
     </div>
   </div>
 </nav>

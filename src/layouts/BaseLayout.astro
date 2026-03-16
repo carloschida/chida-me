@@ -1,16 +1,18 @@
 ---
 interface Props {
-  title?: string;
-  description?: string;
-  ogImage?: string;
-  canonical?: string;
-  metadata?: {
-    title?: string;
-    description?: string;
-    ogImage?: string;
-    canonical?: string;
-    ignoreTitleTemplate?: boolean;
-  };
+  title?: string | undefined;
+  description?: string | undefined;
+  ogImage?: string | undefined;
+  canonical?: string | undefined;
+  metadata?:
+    | {
+        title?: string | undefined;
+        description?: string | undefined;
+        ogImage?: string | undefined;
+        canonical?: string | undefined;
+        ignoreTitleTemplate?: boolean | undefined;
+      }
+    | undefined;
 }
 
 import Seo from "@/components/seo/Seo.astro";
@@ -35,6 +37,7 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
 
 <!doctype html>
 <html lang={siteConfig.lang} class="scroll-smooth">
+  <!--suppress HtmlRequiredTitleElement -->
   <head>
     <Seo
       title={finalTitle}
@@ -45,6 +48,7 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
     />
     <ClientRouter />
     <Schema type="WebSite" data={{}} />
+    <!--suppress HtmlUnknownTag -->
     <slot name="head" />
     <script is:inline>
       const getTheme = () => {
@@ -101,7 +105,7 @@ const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
       </div>
 
       <Navbar />
-      <main id="main-content" class="relative z-10 grow pt-[72px]">
+      <main id="main-content" class="relative z-10 grow pt-18">
         <slot />
       </main>
       <Footer />

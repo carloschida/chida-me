@@ -1,0 +1,114 @@
+---
+import { getImage, Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+import profileImage from "@/assets/images/profile.webp";
+import CardPersonalInfo from "@/components/cv/card-personal-info.astro";
+import Headline from "@/components/ui/Headline.astro";
+import { siteConfig } from "@/config/site.ts";
+import { cv } from "@/content/cv";
+import type { JobSchema } from "@/schemas/cv.ts";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Summary from "@/components/cv/summary.astro";
+import Skills from "@/components/cv/skills.astro";
+import Tools from "@/components/cv/tools.astro";
+import Languages from "@/components/cv/languages.astro";
+import WorkExperience from "@/components/cv/work-experience.astro";
+
+const metadata = {
+  title: "CV",
+  description:
+    "Check out my CV to find out more about my experience and skills.",
+};
+
+const jobs = (cv.jobs as unknown as JobSchema[]) ?? [];
+
+const optimizedImage = await getImage({
+  src: profileImage,
+  format: "webp",
+});
+---
+
+<BaseLayout {metadata}>
+  <link slot="head" rel="preload" href={optimizedImage.src} as="image" />
+
+  <section class="relative px-4 py-8 sm:px-6 lg:px-8 md:py-12">
+    <div class="absolute inset-0 z-0">
+      <div
+        class="absolute inset-0 bg-linear-to-br from-blue-500/5 via-transparent to-pink-500/5"
+      >
+      </div>
+    </div>
+    <div class="relative mx-auto max-w-5xl">
+      <Headline
+        tagline="CV"
+        title="Carlos Chida"
+        subtitle="Lead Software Developer"
+        titleAs="h1"
+        classes={{
+          container: "reveal mb-12 text-center",
+          title:
+            "font-heading mb-4 text-4xl font-bold tracking-tight text-foreground md:text-6xl",
+          subtitle: "mx-auto max-w-3xl text-xl text-muted-foreground",
+        }}
+      />
+    </div>
+  </section>
+
+  <section class="relative px-2 py-4 sm:px-6 lg:px-8 md:py-4">
+    <div class="relative mx-auto max-w-5xl">
+      <div class="grid grid-col-1 md:grid-cols-3 gap-8">
+        <aside class="col-span-1 px-4 md:px-0">
+          <Image
+            alt={"Profile photo of Carlos Chida"}
+            class={"rounded-3xl shadow-2xl mx-auto border border-border/50 aspect-square object-cover size-48 mb-4"}
+            src={profileImage}
+          />
+
+          <div class="flex flex-row justify-center gap-8 mb-4">
+            <a href={siteConfig.socialLinks.linkedIn}>
+              <div
+                class="size-12 rounded-lg flex justify-center items-center border border-neutral-50 text-neutral-50 hover:bg-neutral-50/10"
+              >
+                <Icon name={"lucide:github"} class={"size-6"} />
+              </div>
+            </a>
+
+            <a href={siteConfig.socialLinks.linkedIn}>
+              <div
+                class="size-12 rounded-lg flex justify-center items-center border border-blue-400 text-blue-400 hover:bg-blue-400/10"
+              >
+                <Icon name={"lucide:linkedin"} class={"size-6"} />
+              </div>
+            </a>
+          </div>
+
+          <CardPersonalInfo
+            location={cv.location}
+            citizenship={cv.citizenship}
+          />
+
+          {cv.skills !== undefined ? <Skills skills={cv.skills} /> : null}
+
+          {
+            cv.technologies !== undefined ? (
+              <Tools technologies={cv.technologies} />
+            ) : null
+          }
+
+          {
+            cv.languages !== undefined ? (
+              <Languages languages={cv.languages} />
+            ) : null
+          }
+        </aside>
+
+        <div class="col-span-1 md:col-span-2 px-4 md:px-0">
+          {cv.summary !== undefined ? <Summary summary={cv.summary} /> : null}
+
+          <WorkExperience jobs={jobs} />
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

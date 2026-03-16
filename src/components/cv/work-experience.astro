@@ -1,0 +1,16 @@
+---
+import type { JobSchema } from "@/schemas/cv.ts";
+import JobCard from "./job-card.astro";
+
+interface Props {
+  readonly jobs: readonly JobSchema[];
+}
+
+const { jobs } = Astro.props;
+---
+
+<section class="mb-8">
+  <h2 class="mb-4 text-2xl text-primary font-bold">Work Experience</h2>
+
+  {jobs.map((job) => <JobCard job={job} />)}
+</section>

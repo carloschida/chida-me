@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from "@/config/site";
+import { Icon } from "astro-icon/components";
 ---
 
 <footer class="mt-20 border-t border-border bg-card">
@@ -12,34 +13,40 @@ import { siteConfig } from "@/config/site";
         </p>
       </div>
       <div class="flex items-center gap-6">
-        <a
-          href={siteConfig.socialLinks.twitter}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-muted-foreground transition-colors hover:text-primary"
-          >Twitter</a
-        >
+        <!--<a-->
+        <!--  href={siteConfig.socialLinks.twitter}-->
+        <!--  target="_blank"-->
+        <!--  rel="noopener noreferrer"-->
+        <!--  class="text-muted-foreground transition-colors hover:text-primary"-->
+        <!--&gt;-->
+        <!--  Twitter-->
+        <!--</a>-->
         <a
           href={siteConfig.socialLinks.github}
           target="_blank"
           rel="noopener noreferrer"
           class="text-muted-foreground transition-colors hover:text-primary"
-          >GitHub</a
         >
+          GitHub
+        </a>
         <a
-          href={siteConfig.socialLinks.discord}
+          href={siteConfig.socialLinks.linkedIn}
           target="_blank"
           rel="noopener noreferrer"
           class="text-muted-foreground transition-colors hover:text-primary"
-          >Discord</a
         >
+          LinkedIn
+        </a>
       </div>
     </div>
     <div
       class="mt-8 border-t border-border pt-8 text-center text-xs text-muted-foreground"
     >
-      &copy; {new Date().getFullYear()}
-      {siteConfig.author}. All rights reserved.
+      <Icon name="lucide:creative-commons" class="w-4 h-4 inline-flex mr-1" />
+      Except where otherwise noted, content on this site is licensed under a <a
+        href="https://creativecommons.org/licenses/by/4.0/"
+        >Creative Commons Attribution 4.0 International license</a
+      >.
     </div>
   </div>
 </footer>

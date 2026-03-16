@@ -4,12 +4,12 @@ import { siteConfig } from "@/config/site";
 interface Props {
   type: "WebSite" | "BlogPosting" | "BreadcrumbList";
   data: {
-    title?: string;
-    description?: string;
-    image?: string;
-    pubDate?: Date;
-    author?: string;
-    url?: string;
+    title?: string | undefined;
+    description?: string | undefined;
+    image?: string | undefined;
+    pubDate?: Date | undefined;
+    author?: string | undefined;
+    url?: string | undefined;
   };
 }
 
@@ -51,7 +51,7 @@ if (type === "WebSite") {
       name: siteConfig.name,
       logo: {
         "@type": "ImageObject",
-        // Placeholder, ideally should be a real logo URL
+        // Placeholder, ideally, should be a real logo URL
         url: new URL("/favicon.svg", siteConfig.url).toString(),
       },
     },
@@ -59,4 +59,8 @@ if (type === "WebSite") {
 }
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+  is:inline
+/>

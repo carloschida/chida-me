@@ -1,0 +1,55 @@
+---
+import iso3166 from "iso-3166-1-alpha-2";
+import iso6391 from "iso-639-1";
+import Card from "@/components/ui/Card.astro";
+import type { CvType } from "@/schemas/cv.ts";
+
+interface Props {
+  languages: NonNullable<CvType["languages"]>;
+}
+
+const { languages } = Astro.props;
+
+function getLanguageName(code: string) {
+  if (!code.includes("-")) {
+    return iso6391.getName(code);
+  }
+
+  const parts = code.split("-");
+  if (parts.length !== 2) {
+    return iso6391.getName(code);
+  }
+  return `${iso6391.getName(parts[0])} (${iso3166.getCountry(parts[1])})`;
+}
+---
+
+<Card
+  class="flex flex-col gap-y-4 text-base md:text-sm lg:text-base md:p-4 lg:p-8 mb-4"
+>
+  <h2 class="font-bold text-primary text-lg">Languages</h2>
+  <div class="flex flex-col gap-y-2">
+    {
+      languages.map((language) => (
+        <div class="flex flex-row justify-between items-center">
+          <span>
+            {typeof language === "string"
+              ? language
+              : getLanguageName(language.code)}
+          </span>
+          {typeof language !== "string" ? (
+            <div class="flex flex-row gap-x-1">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <div
+                  class:list={[
+                    "size-2 rounded-full",
+                    i < language.level ? "bg-primary" : "bg-muted",
+                  ]}
+                />
+              ))}
+            </div>
+          ) : null}
+        </div>
+      ))
+    }
+  </div>
+</Card>
