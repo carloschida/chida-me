@@ -7,8 +7,11 @@ import icon from "astro-icon";
 import ecTwoSlash from "expressive-code-twoslash";
 import remarkReadingTime from "remark-reading-time";
 
+import cloudflare from "@astrojs/cloudflare";
+
 export default defineConfig({
   site: "https://chida.me",
+
   integrations: [
     sitemap(),
     icon(),
@@ -17,6 +20,7 @@ export default defineConfig({
     }),
     mdx(),
   ],
+
   markdown: {
     remarkPlugins: [
       remarkReadingTime,
@@ -28,6 +32,7 @@ export default defineConfig({
       },
     ],
   },
+
   i18n: {
     defaultLocale: "en",
     locales: ["en", "es"],
@@ -35,14 +40,23 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
+
   prefetch: {
     prefetchAll: true,
     defaultStrategy: "viewport",
   },
+
   build: {
     inlineStylesheets: "always",
   },
+
   vite: {
     plugins: [tailwindcss()],
   },
+
+  adapter: cloudflare({
+    platformProxy: {
+      enabled: true,
+    }
+  }),
 });
