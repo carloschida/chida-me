@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Effect.ts with Pokémon"
+title: "Introduction to Effect.ts with Pokémon (1/n)"
 pubDate: "2026-03-16T12:00:00.000-06:00"
 description: "Gotta catch 'em bugs!"
 author: "Carlos Chida"
@@ -762,3 +762,7 @@ But the lesson to take is that error handling is tough. And this was only a
 single functionality!
 
 Stay tuned for the next part! As soon as I finish it, you'll see it here.
+
+## Update (2026-03-18)
+
+[Here](/blog/intro-to-effect-2) is the next part of the series.
