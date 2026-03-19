@@ -10,7 +10,7 @@ image: "/blog/state-machine.webp"
 
 Welcome back to the second part of the series Introduction to Effect.ts with
 Pokémon. If you didn't catch the previous part, you can find it
-[here](https://chida.me/blog/0001_effect-1).
+[here](/blog/intro-to-effect-1).
 
 ## What is an Effect?
 
