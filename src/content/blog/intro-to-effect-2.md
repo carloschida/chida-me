@@ -475,9 +475,9 @@ export function getEvolution(basePokemonId: number): Pokemon | undefined {
   Effect.runSync(
     Effect.match(eGetPokemonById(basePokemonId), {
       onSuccess: (result) => {
+        //          ^?
         pokemon = result;
       },
-      //          ^?
       onFailure: (err) => {
         //        ^?
         switch (err._tag) {
