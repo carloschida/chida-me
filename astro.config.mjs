@@ -10,7 +10,9 @@ import remarkReadingTime from "remark-reading-time";
 import cloudflare from "@astrojs/cloudflare";
 
 export default defineConfig({
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    imageService: "cloudflare",
+  }),
 
   build: {
     inlineStylesheets: "always",
@@ -44,7 +46,6 @@ export default defineConfig({
       },
     ],
   },
-
 
   prefetch: {
     prefetchAll: true,
