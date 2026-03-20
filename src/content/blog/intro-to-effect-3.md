@@ -654,7 +654,6 @@ export function getEvolution(basePokemonId: number): Pokemon {
         onSuccess: (result) => result,
         onFailure: (err) => {
           switch (err._tag) {
-            // This corresponds to our previous line
             case "ApiDownError":
               throw new Error("Could not reach the database");
             case "PokemonNotFoundError":
@@ -697,7 +696,7 @@ You approach, `Effect.match` and enquire: 'Why don't you tell me whether it was 
 
 Annoyed yourself now, you approach one of the `eGetPokemonById` desks and demand: 'From now on, you are to label whether your results with "base" or "evolution".' He ain't taking it — he challenges back: 'And what if it's the evolution of the evolution? I get dropped this green folders that just say `Pokemon`! And they are tons, I don't have time to your incognizant process change.' He's also right.
 
-Time for a change of strategy... This young courier `Effect.andThen` and is a young lad; he's surely eager to grow within the company. 'Hey, `andThen`, how's life?' and before he utters the first word, you start speaking again. 'Listen, a favour: from now on, you are going to label tell `eGetPokemonById` whether the folder you're devlivering is from a base Pokémon or an evolution' and is a young lad; he's surely eager to grow within the company. 'Hey, `andThen`, how's life?' and before he utters the first word, you start speaking again. 'Listen, a favour: from now on, you are going to tell `eGetPokemonById` whether the folder you're devlivering is from a base Pokémon or an evolution.'
+Time for a change of strategy... This young courier `Effect.andThen` is a young lad; he's surely eager to grow within the company. 'Hey, `andThen`, how's life?' and before he utters the first word, you start speaking again. 'Listen, a favour: from now on, you are going to label tell `eGetPokemonById` whether the folder you're devlivering is from a base Pokémon or an evolution.'
 
 With the strongest of the Spanish accents, he replies: '[E**b**olutions?](https://youtu.be/VeLjFRPPvuY?si=npV_g28qzh-0YDvY)! You know I'm still attending [U**b**a](https://pokemon.fandom.com/wiki/Naranja_and_Uva_Academies), no? I not know about those yet. I'm here only as a part-time, I'm going to be a Pokémon trainer!' Then he swiftly resumes watching the 2022 World Champion encounter of Ash Ketchum v Leon on his phone. You become short for words at the dismay of the academic level of Uva Academy, but arrogantly accept it as you graduated from Naranja.
 
